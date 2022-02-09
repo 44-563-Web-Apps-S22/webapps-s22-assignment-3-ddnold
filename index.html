@@ -2,7 +2,24 @@
 <html>
     <style>
         table, th, td {
-  border: 1px solid black; }
+        border: 1px solid black; }
+        blockquote {
+        margin: 0;
+        }
+
+        blockquote p {
+        padding: 15px;
+        background: #eee;
+        border-radius: 5px;
+        }
+
+        blockquote p::before {
+        content: '\201C';
+        }
+
+        blockquote p::after {
+        content: '\201D';
+        }
     </style>
     <head>
         <title>Index of things</title>
@@ -13,53 +30,110 @@
         <h2>I like to buy food from Black Pony Brewing</h2>
         <p>The Black Pony Brewing Co. is located on the square in maryville. 
             It's located right next door to the <b>courthouse</b>, license bureau, and the best bar in town, <b>The Pub.</b></p>
-            <hr>
-            <h2>Travel</h2>
-            <p>The closest airport to the town of Maryville is the <b>"NW Missouri Regional Airport-Evu".</b> In order to get to Black Pony Brewery from there you will need to do the following:</p>
-            <ol>
-                <li>Take Hawk Rd. to Hwy 46.</li>
-                <li>Take Hwy 46 or 1st st. into town and take a left on Main st.</li>
-                <li>Follow Main st. 3 blocks North.</li>
-                <ul>
-                <li>Your destination is on your right on the corner of 4th and Main.</li>
-                </ul>
-            </ol>
-            <p>If you get a chance to go, I recommend trying the following:</p>
+        <hr>
+        <h1>Travel</h1>
+        <p>The closest airport to the town of Maryville is the <b>"NW Missouri Regional Airport-Evu".</b> In order to get to Black Pony Brewery from there you will need to do the following:</p>
+        <ol>
+            <li>Take Hawk Rd. to Hwy 46.</li>
+            <li>Take Hwy 46 or 1st st. into town and take a left on Main st.</li>
+            <li>Follow Main st. 3 blocks North.</li>
             <ul>
-                <li>Triple Crown Melt</li>
-                <li>Chicken Parm</li>
-                <li>Any flatbread pizza</li>
-                <li>Also try one of my favorite beers...</li>
-                <ul>
-                    <li>50 Shades of Hay</li>
-                    <li>The Big Brown</li>
-                    <li>The American Pharaoh</li>
-                </ul>
+                <li>Your destination is on your right on the corner of 4th and Main.</li>
             </ul>
-            <a href="aboutme.html">For more about me.</a>
-            <hr>
-            <h1>Sports</h1>
-            <table>
-                <tr>
-                    <th>Sport</th>
-                    <th>Location</th>
-                    <th>Cost</th>
-                </tr>
-                <tr>
-                    <td>Baseball</td>
-                    <td>Baseball Field</td>
-                    <td>$200-$400</td>
-                </tr>
-                <tr>
-                    <td>Soccer</td>
-                    <td>Soccer Field</td>
-                    <td>$200-$500</td>
-                </tr>
-                <tr>
-                    <td>Tennis</td>
-                    <td>Tennis Court</td>
-                    <td>$200-$1000</td>
-                </tr>
-            </table>
+        </ol>
+        <p>If you get a chance to go, I recommend trying the following:</p>
+        <ul>
+            <li>Triple Crown Melt</li>
+            <li>Chicken Parm</li>
+            <li>Any flatbread pizza</li>
+            <li>Also try one of my favorite beers...</li>
+            <ul>
+                <li>50 Shades of Hay</li>
+                <li>The Big Brown</li>
+                <li>The American Pharaoh</li>
+            </ul>
+        </ul>
+        <a href="aboutme.html">For more about me.</a>
+        <hr>
+        <h1>Sports</h1>
+        <table>
+            <tr>
+                <th>Sport</th>
+                <th>Location</th>
+                <th>Cost</th>
+            </tr>
+            <tr>
+                <td>Baseball</td>
+                <td>Baseball Field</td>
+                <td>$200-$400</td>
+            </tr>
+            <tr>
+                <td>Soccer</td>
+                <td>Soccer Field</td>
+                <td>$200-$500</td>
+            </tr>
+            <tr>
+                <td>Tennis</td>
+                <td>Tennis Court</td>
+                <td>$200-$1000</td>
+            </tr>
+        </table>
+        <hr>
+        <h1>Gauss method for solving system of linear equations</h1>
+        <blockquote cite="https://www.studypug.com/algebra-help/solving-a-linear-system-with-matrices-using-gaussian-elimination">
+        <p>Gaussian elimination is the name of the method we use to perform the three types of matrix row operations on an augmented matrix coming from a linear system of equations in order to find the solutions for such system. This technique is also called row reduction and it consists of two stages: Forward elimination and back substitution.
+        </p> 
+        </blockquote>
+        <p>for more information please visit <a href="https://www.studypug.com/algebra-help/solving-a-linear-system-with-matrices-using-gaussian-elimination"> Studypug! </a>
+        </p>
+        <pre>
+            <code>
+            const double EPS = 1e-9;
+            const int INF = 2; // it doesn't actually have to be infinity or a big number
+            
+            int gauss (vector < vector<double> > a, vector<double> & ans) {
+                int n = (int) a.size();
+                int m = (int) a[0].size() - 1;
+            
+                vector<int> where (m, -1);
+                for (int col=0, row=0; col < m && row < n; ++col) {
+                    int sel = row;
+                    for (int i=row; i< n; ++i)
+                        if (abs (a[i][col]) > abs (a[sel][col]))
+                            sel = i;
+                    if (abs (a[sel][col]) < EPS)
+                        continue;
+                    for (int i=col; i<=m; ++i)
+                        swap (a[sel][i], a[row][i]);
+                    where[col] = row;
+            
+                    for (int i=0; i< n; ++i)
+                        if (i != row) {
+                            double c = a[i][col] / a[row][col];
+                            for (int j=col; j<=m; ++j)
+                                a[i][j] -= a[row][j] * c;
+                        }
+                    ++row;
+                }
+            
+                ans.assign (m, 0);
+                for (int i=0; i< m; ++i)
+                    if (where[i] != -1)
+                        ans[i] = a[where[i]][m] / a[where[i]][i];
+                for (int i=0; i< n; ++i) {
+                    double sum = 0;
+                    for (int j=0; j< m; ++j)
+                        sum += ans[j] * a[i][j];
+                    if (abs (sum - a[i][m]) > EPS)
+                        return 0;
+                }
+            
+                for (int i=0; i< m; ++i)
+                    if (where[i] == -1)
+                        return INF;
+                return 1;
+            }
+            </code>
+        </pre>
     </body>
 </html>
